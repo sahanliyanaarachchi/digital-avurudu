@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Avurudu Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.postimg.cc/c4y533NP/LLLLLL.jpg'); /* Add your background image URL */
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        header img {
+            width: 100px;
+            height: auto;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        nav a {
+            font-size: 24px;
+            color: white;
+            margin: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .about-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .about-section p {
+            font-size: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .back-arrow {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .audio-player-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .play-icon {
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .play-icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Arrow -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592; Back</a>
+
+    <header>
+        <img src="https://i.postimg.cc/2STHgXBf/brain-and-technology-unique-logo-vector-removebg-preview.png" alt="Logo">
+        <h1>Online Avurudu</h1>
+    </header>
+
+    <nav>
+        <a href="2.HTML">ලිස්සන ගස නැගීම</a>
+        <a href="4.html">පැපොල් ගෙඩියේ ඇට ගනම් කීරීම</a>
+        <a href="3.HTML">සැගවුන අමුත්තා සෙවීම</a>
+        <a href="1.html">කානාමුට්ටිය බිදීම</a>
+    </nav>
+
+    <section id="about" class="about-section">
+        <h2>ABOUT</h2>
+        <p>
+            මෙම අන්තර්ජාල අලුත් අවුරුදු ක්‍රීඩා පිටුව ඔබට සම්ප්‍රදායික අලුත් අවුරුදු උත්සවයේ විනෝදාස්වාදය අන්තර්ජාලය හරහා අත්විඳින්නා හැක. මෙහිදී එකට මනා ලෙස ගැලපෙන ක්‍රීඩා, විනෝදජනක අභියෝග, සහ සෙසු අමුත්තා සෙවීමේ කුසලතා පරීක්ෂා කරගැනීමට අලුත් අත්දැකීම් ලබාගත හැකියි. මෙය ඔබේ ආදරනීය දරුවන්, මිතුරන් සහ ආදරණීයයන් සමඟ අලුත් අවුරුදු සමය අමරණීය කරවීමේ විශිෂ්ට අවස්ථාවකි!
+            CREATED BY SAHAN LIYANAARACHCHI.</p>
+    </section>
+
+    <!-- Audio Player -->
+    <div class="audio-player-container">
+        <span class="play-icon" id="playIcon">&#9654;</span> <!-- Play icon -->
+        <audio id="audio" preload="auto">
+            <source src="file:///C:/Users/User/Documents/DIGITAL%20AVURUDU/Suba-Sihine-Yawi-Awurudu-Song-Various-www.song.lk.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Online Avurudu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for the Play Icon
+        const playIcon = document.getElementById('playIcon');
+        const audio = document.getElementById('audio');
+
+        playIcon.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.innerHTML = '&#10074;&#10074;';  // Change icon to pause
+            } else {
+                audio.pause();
+                playIcon.innerHTML = '&#9654;';  // Change icon to play
+            }
+        });
+    </script>
+
+</body>
+</html>

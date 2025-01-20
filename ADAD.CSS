@@ -1,0 +1,98 @@
+/* සම්පූර්ණ මෙනුවට මූලික සැලැසුම */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('background-image-url'); /* ඔබේ පසුබැසී රූප URL එක */
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+/* පේජ් හෙඩරය */
+header {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+header img {
+    width: 100px;
+    height: auto;
+}
+
+/* මෙනු ලින්ක්ස් */
+nav {
+    text-align: center;
+    margin-top: 50px;
+}
+
+nav a {
+    font-size: 24px;
+    color: white;
+    margin: 20px;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* About Section එක */
+.about-section {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.about-section p {
+    font-size: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Back Arrow */
+.back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-arrow:hover {
+    color: #ffd700; /* Hover වෙලාවට රන් වර්ණ */
+}
+
+/* Play Icon එක */
+.audio-player-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.play-icon {
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.play-icon:hover {
+    transform: scale(1.2);
+    color: #ffd700; /* Hover වෙලාවට රන් වර්ණ */
+}

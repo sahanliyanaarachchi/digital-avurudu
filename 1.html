@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutti Bindima Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.postimg.cc/25fJLvpH/8c5cba78917545-Y3-Jvc-Cw5-OTks-Nzgy-LDAs-MTA4.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .muttiya-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .muttiya {
+            width: 100px;
+            height: 120px;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        h1, p {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        #overlay img {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+        #overlay button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>හරි මුට්ටිය බිඳන්න!</h1>
+    <p>හරි මුට්ටියට ඔබන්න!</p>
+    <div class="muttiya-container">
+        <img src="https://i.postimg.cc/hG5DqpQJ/avurudu-kana-muttiya-removebg-preview-1.png" alt="Muttiya 1" id="muttiya1" class="muttiya">
+        <img src="https://i.postimg.cc/hG5DqpQJ/avurudu-kana-muttiya-removebg-preview-1.png" alt="Muttiya 2" id="muttiya2" class="muttiya">
+        <img src="https://i.postimg.cc/hG5DqpQJ/avurudu-kana-muttiya-removebg-preview-1.png" alt="Muttiya 3" id="muttiya3" class="muttiya">
+        <img src="https://i.postimg.cc/hG5DqpQJ/avurudu-kana-muttiya-removebg-preview-1.png" alt="Muttiya 4" id="muttiya4" class="muttiya">
+    </div>
+    <p id="result" style="font-size: 24px; font-weight: bold;"></p>
+
+    <!-- Overlay for Retry Screen -->
+    <div id="overlay">
+        <img src="https://i.postimg.cc/vmPgf5xy/image.png" alt="Try Again">
+        <p style="font-size: 24px;">මට කණගාටුයි! නැවත උත්සහ කරන්න.</p>
+        <button onclick="closeOverlay()">පසුව බලමු</button>
+    </div>
+
+    <!-- Add audio -->
+    <audio id="bg-sound" src="file:///C:/Users/User/Music/Suba-Sihine-Yawi-Awurudu-Song-Various-www.song.lk.mp3" autoplay loop></audio>
+    <audio id="break-sound" src="file:///C:/Users/User/Music/Suba-Sihine-Yawi-Awurudu-Song-Various-www.song.lk.mp3"></audio>
+    <audio id="wrong-sound" src="wrong.mp3"></audio>
+
+    <script>
+        // Background sound auto play
+        const bgSound = document.getElementById('bg-sound');
+        bgSound.volume = 0.5;
+
+        // Initialize variables
+        let correctPot = Math.floor(Math.random() * 4) + 1; // Random initial correct pot
+
+        // Audio elements
+        const breakSound = document.getElementById('break-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+
+        // Overlay element
+        const overlay = document.getElementById('overlay');
+
+        // Function to shuffle correct pot
+        function shuffleCorrectPot() {
+            correctPot = Math.floor(Math.random() * 4) + 1; // Randomize correct pot
+        }
+
+        // Function to close overlay
+        function closeOverlay() {
+            overlay.style.display = 'none'; // Hide overlay
+            shuffleCorrectPot(); // Shuffle correct pot for next round
+        }
+
+        // Add click listeners to all pots
+        for (let i = 1; i <= 4; i++) {
+            const muttiya = document.getElementById(`muttiya${i}`);
+            muttiya.addEventListener('click', function () {
+                if (i === correctPot) {
+                    document.getElementById('result').textContent = "ඔබ හරි මූට්ටිය බිඳාගත්තා!";
+                    breakSound.play(); // Correct pot sound
+                } else {
+                    overlay.style.display = 'flex'; // Show retry screen
+                    wrongSound.play(); // Wrong pot sound
+                }
+            });
+        }
+    </script>
+</body>
+</html>

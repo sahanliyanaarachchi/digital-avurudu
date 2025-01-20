@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiding Man Search Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('https://i.postimg.cc/MH9F8Pv4/ONLINE.png'); /* පසුබැසීමේ රූපය */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hidden-man {
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .message {
+            position: absolute;
+            font-size: 60px;  /* ලොකු අකුරු */
+            color: white;
+            text-align: center;
+            display: none;
+            z-index: 10;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7); /* අඳුරු පසුබැසීමක් */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .found {
+            display: block;
+            background-color: green;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .not-found {
+            display: block;
+            background-color: red;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container" id="game-container">
+    <!-- Hidden Man Images (15 images) -->
+    <img id="hidden-man1" class="hidden-man" src="https://i.postimg.cc/sfWPd0ZZ/depositphotos-274894428-stock-illustration-young-and-casual-man-character-removebg-preview.png" alt="Man 1">
+    <img id="hidden-man2" class="hidden-man" src="https://i.postimg.cc/fb4ZFy4d/depositphotos-238832374-stock-illustration-young-man-avatar-character-removebg-preview-1.png" alt="Man 2">
+    <img id="hidden-man3" class="hidden-man" src="https://i.postimg.cc/tghyHbyM/pngtree-the-man-cartoon-cartoon-man-green-png-image-476612-removebg-preview.png" alt="Man 3">
+    <img id="hidden-man4" class="hidden-man" src="https://i.postimg.cc/66HKKYJt/360-F-202066566-OEzm-A65-G1ze-Nuvy3-Xj-YYzvn-Qm-Fa-Q3-YQI-removebg-preview.png" alt="Man 4"> <!-- This is the hidden man -->
+    <img id="hidden-man5" class="hidden-man" src="https://i.postimg.cc/wTZdyMjr/cccfcc40829329e19af7b459cb4aab11-removebg-preview.png" alt="Man 5">
+    <img id="hidden-man6" class="hidden-man" src="https://i.postimg.cc/sfWPd0ZZ/depositphotos-274894428-stock-illustration-young-and-casual-man-character-removebg-preview.png" alt="Man 6">
+    <img id="hidden-man7" class="hidden-man" src="https://i.postimg.cc/fRJ6MN7v/64-649699-man-png-transparent-free-images-transparent-background-man-removebg-preview.png" alt="Man 7">
+    <img id="hidden-man8" class="hidden-man" src="https://i.postimg.cc/mkk0hWfR/lovepik-cartoon-character-png-image-401302775-wh1200-removebg-preview.png" alt="Man 8">
+    <img id="hidden-man9" class="hidden-man" src="https://i.postimg.cc/hvN3jJ1b/pngtree-retro-cartoon-character-design-with-cute-boy-png-image-6421332-removebg-preview.png" alt="Man 9">
+    <img id="hidden-man10" class="hidden-man" src="https://i.postimg.cc/SQPPV5b2/pngtree-young-business-woman-cartoon-in-difference-posture-png-image-4502765-removebg-preview.png" alt="Man 10">
+    <img id="hidden-man11" class="hidden-man" src="https://i.postimg.cc/SsvgTX3F/7d955e34506e2cc9f29d2e6c3d85b8d3-removebg-preview.png" alt="Man 11">
+    <img id="hidden-man12" class="hidden-man" src="https://i.postimg.cc/SsvgTX3F/7d955e34506e2cc9f29d2e6c3d85b8d3-removebg-preview.png" alt="Man 12">
+    <img id="hidden-man13" class="hidden-man" src="https://i.postimg.cc/2jqYznzW/Cartoon-Man-PNG-Free-File-Download-removebg-preview.png" alt="Man 13">
+    <img id="hidden-man14" class="hidden-man" src="https://i.postimg.cc/2jqYznzW/Cartoon-Man-PNG-Free-File-Download-removebg-preview.png" alt="Man 14">
+    
+
+
+    <div class="message" id="message"></div>
+</div>
+
+<!-- Background Sound -->
+<audio id="background-sound" loop>
+    <source src="file:///C:/Users/User/Music/Suba-Sihine-Yawi-Awurudu-Song-Various-www.song.lk.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    const manImages = [
+        'https://example.com/man1.png', 'https://example.com/man2.png', 'https://example.com/man3.png',
+        'https://example.com/man4.png', 'https://example.com/man5.png', 'https://example.com/man6.png',
+        'https://example.com/man7.png', 'https://example.com/man8.png', 'https://example.com/man9.png',
+        'https://example.com/man10.png', 'https://example.com/man11.png', 'https://example.com/man12.png',
+        'https://example.com/man13.png', 'https://example.com/man14.png', 'https://example.com/man15.png'
+    ];
+
+    const sound = document.getElementById('background-sound');
+    sound.play(); // Play background sound
+
+    // Randomly place all the man images
+    function placeManImages() {
+        const container = document.getElementById('game-container');
+        const manElements = document.querySelectorAll('.hidden-man');
+
+        manElements.forEach((man) => {
+            const maxWidth = container.offsetWidth - man.offsetWidth;
+            const maxHeight = container.offsetHeight - man.offsetHeight;
+
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+
+            man.style.left = randomX + 'px';
+            man.style.top = randomY + 'px';
+            man.style.display = 'block';
+        });
+    }
+
+    // Check for click
+    function checkClick(event) {
+        const message = document.getElementById('message');
+        const manElements = document.querySelectorAll('.hidden-man');
+
+        let found = false;
+
+        manElements.forEach((man, index) => {
+            // Check if 4th image (index 3) is clicked
+            if (index === 3) {
+                const manRect = man.getBoundingClientRect();
+                const clickX = event.clientX;
+                const clickY = event.clientY;
+
+                if (
+                    clickX >= manRect.left &&
+                    clickX <= manRect.right &&
+                    clickY >= manRect.top &&
+                    clickY <= manRect.bottom
+                ) {
+                    found = true;
+                    man.style.display = 'none'; // Hide the clicked man
+                }
+            }
+        });
+
+        if (found) {
+            message.textContent = "සැගවුනු අමුත්තාව සොයා ගාත්තා!";
+            message.className = 'message found';
+        } else {
+            message.textContent = "නැහැ, නැවත උත්සාහ කරන්න!";
+            message.className = 'message not-found';
+        }
+
+        message.style.display = 'block';
+
+        setTimeout(() => {
+            message.style.display = 'none';
+            placeManImages(); // Place the men in new positions
+        }, 1500);
+    }
+
+    // Initialize the game
+    document.body.addEventListener('click', checkClick);
+    placeManImages();
+</script>
+
+</body>
+</html>

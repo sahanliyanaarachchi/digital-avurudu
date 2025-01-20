@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papol Count Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #ffe4b5;
+            font-family: Arial, sans-serif;
+        }
+
+        .game-container {
+            text-align: center;
+            border: 5px solid #8b4513;
+            background: #ffcc66;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+        }
+
+        .fruit {
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .counter button {
+            background-color: #ff9933;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px #d87c00;
+        }
+
+        .counter button:active {
+            box-shadow: 0 2px #d87c00;
+            transform: translateY(2px);
+        }
+
+        .count-display {
+            font-size: 40px;
+            color: #8b0000;
+            font-weight: bold;
+        }
+
+        #check-btn {
+            margin-top: 20px;
+            background-color: #006400;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result-message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .failure {
+            color: red;
+        }
+
+        #result-image {
+            margin-top: 20px;
+            display: none;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <img src="https://media.baamboozle.com/uploads/images/740836/1679135840_210923_gif-url.gif" alt="Papol Gediya" class="fruit">
+        <div class="counter">
+            <button onclick="decreaseCount()">⬇</button>
+            <div class="count-display" id="countDisplay">0</div>
+            <button onclick="increaseCount()">⬆</button>
+        </div>
+        <button id="check-btn" onclick="checkAnswer()">Check</button>
+        <div id="result-message"></div>
+        <img id="result-image" alt="Result Image">
+    </div>
+
+    <script>
+        let count = 0;
+        const correctAnswer = 30; // Correct answer is 30
+
+        function increaseCount() {
+            count++;
+            updateDisplay();
+        }
+
+        function decreaseCount() {
+            if (count > 0) {
+                count--;
+            }
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('countDisplay').innerText = count;
+        }
+
+        function checkAnswer() {
+            const resultMessage = document.getElementById('result-message');
+            const resultImage = document.getElementById('result-image');
+
+            if (count === correctAnswer) {
+                resultMessage.innerText = "හරි! ඔබේ පිළිතුර නිවැරදියි.";
+                resultMessage.className = "success";
+
+                // Show success image
+                resultImage.src = "data:image/png;base64,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";
+                resultImage.style.display = "block";
+            } else {
+                resultMessage.innerText = "වරදයි! තරගයෙන් පැරදුනි.";
+                resultMessage.className = "failure";
+
+                // Show failure image
+                resultImage.src = "data:image/jpeg;base64,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";
+                resultImage.style.display = "block";
+
+                resetCount(); // Reset count if the answer is wrong
+            }
+        }
+
+        function resetCount() {
+            count = 0;
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>

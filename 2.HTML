@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Climbing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+        }
+
+        #gameArea {
+            position: relative;
+            margin: 50px auto;
+            width: 400px;
+            height: 500px;
+            background-color: #8bc34a00;
+            border: 2px solid #4caf4f00;
+            overflow: hidden;
+        }
+
+        #pole {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 200px;
+            height: 100%;
+            background-image: url('https://i.postimg.cc/9fpm72Sq/1-removebg-preview.png'); /* Replace with actual pole image URL */
+            background-size: cover;
+            transform: translateX(-50%);
+        }
+
+        #man {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background-image: url('https://i.postimg.cc/sfKWrdgx/unnamed-removebg-preview.png'); /* Replace with actual man image URL */
+            background-size: cover;
+            transform: translateX(-50%);
+        }
+
+        #flag {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 800px;
+            height: 900px;
+            background-image: url('https://i.postimg.cc/9fpm72Sq/1-removebg-preview.png'); /* Replace with actual flag image URL */
+            background-size: cover;
+            transform: translateX(-50%);
+        }
+
+        #winMessage {
+            display: none;
+            font-size: 24px;
+            color: #4caf50;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>ලිස්සන ගස </h1>
+    <div id="gameArea">
+        <div id="pole"></div>
+        <div id="man"></div>
+        <div id="flag"></div>
+    </div>
+    <button id="climbButton">නගින්න </button>
+    <div id="winMessage">කොඩිය ගාත්තා සුභ අලුත් අවුරැද්දක් වේවා! </div>
+
+    <script>
+        const man = document.getElementById('man');
+        const flag = document.getElementById('flag');
+        const climbButton = document.getElementById('climbButton');
+        const winMessage = document.getElementById('winMessage');
+        let manPosition = 0;
+        let isClimbing = false;
+
+        let climbInterval;
+
+        // Press down on the button to start climbing
+        climbButton.addEventListener('mousedown', () => {
+            if (!isClimbing) {
+                isClimbing = true;
+                climb();
+            }
+        });
+
+        // Release button to stop climbing
+        climbButton.addEventListener('mouseup', () => {
+            isClimbing = false;
+            fall();
+        });
+
+        // If mouse leaves the button, also stop climbing
+        climbButton.addEventListener('mouseleave', () => {
+            isClimbing = false;
+            fall();
+        });
+
+        function climb() {
+            if (isClimbing && manPosition < 450) {
+                manPosition += 10; // Move 10px upwards
+                man.style.bottom = manPosition + 'px';
+
+                // Check if the man has reached the flag
+                if (manPosition >= 440) {
+                    winMessage.style.display = 'block';
+                    climbButton.disabled = true;
+                }
+
+                climbInterval = setTimeout(climb, 100); // Continue climbing every 100ms
+            }
+        }
+
+        function fall() {
+            let fallInterval = setInterval(() => {
+                if (manPosition > 0) {
+                    manPosition -= 10; // Move 10px downwards
+                    man.style.bottom = manPosition + 'px';
+                } else {
+                    clearInterval(fallInterval); // Stop falling when bottom is reached
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
